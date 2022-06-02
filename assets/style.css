@@ -1,0 +1,29 @@
+
+
+header {
+    padding: 5px;
+    margin: 5px; 
+}
+
+header a {
+    display: inline-block;
+}
+
+header p{
+    float: right; 
+    margin: 0px; 
+}
+
+main {
+    text-align: center; 
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: bolder; 
+}
+
+.correct,
+.incorrect {
+    display: none; 
+}

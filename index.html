@@ -10,27 +10,47 @@
   <body>
     <header>
         <a class="highScoreLink" href="highscore.html">View high scores</a>
-        <p>Time: </p>
-        <div class="timer"></div>
+        <p>Time: 
+            <div class="timer-count"></div>
+        </p>
+        
     </header>
 
     <main>
-        <h1>Coding Quiz Challenge</h1>
-        <p> 
-            Try to answer the following code related quesitons in the given 60 seconds. 
-            Each question you get wrong will penalize you ten seconds! The time you have remaining
-            once you finish the quiz will be your score! 
-        </p>
-        
-        <button type="button">Start!</button>
-        start button
+        <section class="start-screen">
+            <h1>Coding Quiz Challenge</h1>
+            <p> 
+                Try to answer the following code related quesitons in the given 60 seconds. 
+                Each question you get wrong will penalize you ten seconds! The time you have remaining
+                once you finish the quiz will be your score! 
+            </p>
+            
+            <button class="start-button" type="button">Start!</button>
+        </section>
 
+
+        <div class="questions">
+            <!-- h2 is for questions-->
+            <h2 class="question"></h2>
+            <!-- ul for question choices-->
+            <ul class="answers"></ul>
+            <p class="correct">Correct</p>
+            <p class="incorrect">Incorrect</p>
+        </div>
         create classes and ids that can be accessed via javascript
         ex. question div - within have a header2 for the question, ul for the choices
         use classes to hide and show elements, ex. css styling of none, take away with javascript
 
+        <!--use for correct or incorrect-->
+        <div class="feedback"></div>
         div for feedback, ex. correct or incorrect through js
 
+        <div class="endScreen">
+            <p>All done!</p>
+            <p>Your final score is: </p>
+            <div class="initialSubmit"></div>
+            <button type="button">Submit</button>
+        </div>
         end of quiz screen - use divs for:
         All done!
         Your final score is: - grab the remaining time as the score
