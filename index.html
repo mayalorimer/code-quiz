@@ -43,18 +43,13 @@
         <div class="endScreen">
             <p>All done!</p>
             <div class="score"></div>
-            <div class="initialSubmit"></div>
-            <form id="initials">Initials: <input type="text" name="init"> 
-                <input type="button" onclick="submitInit()" value="Submit">
-            </form>
-     
+            <div class="initialSubmit">
+                <form method="POST">
+                    <input type="text" placeholder="Initials" id="initials">
+                    <button type="submit" id="submit-btn">Submit</button>
+                </form>
+            </div>
         </div>
-        end of quiz screen - use divs for:
-        All done!
-        Your final score is: - grab the remaining time as the score
-        Enter initials: - label and imput - submit button
-
-        submit page takes you to the high scores page - can do a new html that links
 
     </main>
   </body>

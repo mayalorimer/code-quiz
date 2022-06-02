@@ -8,6 +8,8 @@ var questions = document.querySelector(".question");
 var answers = document.querySelector(".answers");
 var endScreen = document.querySelector(".endScreen");
 var Finalscore = document.querySelector(".score"); 
+var initialsInput = document.querySelector("#initials");
+var submitBtn = document.querySelector("#submit-btn");
 
 //general variables
 var score = 0; 
@@ -17,6 +19,7 @@ var questionIndex = 0;
 //questions left (by rendering the indexes)
 var questionIndex = 0; 
 //feedback, correct/incorrect
+var highscoresArr = [];
 
 
 
@@ -171,3 +174,44 @@ function submitInit(event){
     var initials = document.getElementById("initials").submit();
     console.log(initials);
 }
+
+submitBtn.addEventListener("click", function(event){
+    event.preventDefault();
+
+    //checks to make sure initials are input
+    if (!initialsInput.value){
+        alert("Please enter your initials");
+        return;
+    }
+
+    //checks if there is any current local storage
+    var checkScores = JSON.parse(localStorage.getItem("highscores"));
+    if (checkScores) {
+        for (var i = 0; i < checkScores.length; i++){
+            highscoresArr.push(checkScores[i]);
+        }
+        localStorage.setItem("highscores", JSON.stringify(highscoresArr)); 
+    }
+
+    //adding the current score to the high scores list
+    highscoresArr[highscoresArr.length] = {
+        initials: initialsInput.value, 
+        score: score
+    }
+    console.log(highscoresArr); 
+    localStorage.setItem("highscores", JSON.stringify(highscoresArr));
+    location.href = "./highscore.html";
+})
+
+var highScoreDisplay = document.querySelector("highScores");
+
+
+// double check this
+var displayScores = [];
+var checkScores = JSON.parse(localStorage.getItem("highscores"));
+    if (checkScores) {
+        for (var i = 0; i < checkScores.length; i++){
+            displayScores.push(checkScores[i]);
+        }
+        highScoreDisplay.textContent = displayScores; 
+    }
