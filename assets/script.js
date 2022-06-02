@@ -41,6 +41,22 @@ var questionsArr = [
         answerChoices: ["Writing content", "Styling content", "Handling logic", "User interaction"],
         correctanswer: "Styling content"
     }
+    {
+        title: "What is the correct way to bold text in CSS?",
+        answerChoices: ["Font: bold", "Font-size: larger", "Font-weight: bold", "Font-color: black"],
+        correctanswer: "Font-weight: bold"
+    }
+    {
+        title: "What feature of Javascript is required to start a function when the user clicks on a certain object?",
+        answerChoices: ["querySelector", "addEventListener", "onClick", "userInteraction"],
+        correctanswer: "addEventListener"
+    }
+    {
+        title: "What method do you use to display data in the browsers console?",
+        answerChoices: ["console.display()", "println()", "console.log()", "showConsole()"],
+        correctanswer: "console.log()"
+    }
+
 ]
 
 // variable to control the objects on the start screen
