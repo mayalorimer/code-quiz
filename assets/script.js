@@ -16,6 +16,22 @@ var questionIndex = 0;
 var questionIndex = 0; 
 //feedback, correct/incorrect
 
+
+
+//array that holds the questions
+var questionsArr = [
+    {
+        title: "String values must be enclosed in __ in javascript.",
+        answerChoices: ["quotes", "curly braces", 'parenthesis', 'backslashes'],
+        correctanswer: "quotes" //compare to the users choice 
+    }, 
+    {
+        title: "Common data types DO NOT include ___.",
+        answerChoices: ["boolean", "alerts", "string", "number"],
+        correctanswer: "alerts"
+    }
+]
+
 // variable to control the objects on the start screen
 var startScreen = document.querySelector(".start-screen");
 
@@ -41,31 +57,18 @@ function startTimer(){
         time--;
         timerElement.textContent = time;
 
-        if (timerCount >= 0){
+        if (time > 0){
             //fill out what happens if there is more time left
             //check if the questions are done being answered
         }
 
-        if (secondsLEft === 0){
+        if (time === 0){
             clearInterval(timerInterval);
             // lose function
         }
-    })
+    }, 1000);
 }
 
-//array that holds the questions
-var questionsArr = [
-    {
-        title: "String values must be enclosed in __ in javascript.",
-        answerChoices: ["quotes", "curly braces", 'parenthesis', 'backslashes'],
-        correctanswer: "quotes" //compare to the users choice 
-    }, 
-    {
-        title: "Common data types DO NOT include ___.",
-        answerChoices: ["boolean", "alerts", "string", "number"],
-        correctanswer: "alerts"
-    }
-]
 
 // renderQuestion()
 function renderQuestion(){
@@ -75,6 +78,7 @@ function renderQuestion(){
         var text = document.createTextNode(questionsArr[questionIndex].answerChoices[j]);
         li.appendChild(text);
         answers.appendChild(li);
+        answers.setAttribute('style', "list-style: none");
     }
 
 // change hidden value of questions div
@@ -92,28 +96,31 @@ function renderQuestion(){
 //add event listeners to the answer choices or div that holds the answer choices using event.target and if matches the correct answer
 // listen for click, make event.target a variable, conditional to see if it is equal to the correct answer, provide feedback
 
+//when an answer is clicked, give feedback and increment questionIndex, then rerender Question
+
 var correctFeedback = document.querySelector(".correct");
 var incorrectFeedback = document.querySelector(".incorrect");
 
-var selectedAns = event.target;
-
-if(selectedAns === questionsArr[0].correctanswer){
-    // provide correct feedback
-    correctFeedback.setAttribute("style", "display: default");
-    // DOM add an element
+answers.addEventListener("click", function(event){
+    var selectedAns = event.target;
+    if(selectedAns === questionsArr[questionIndex].correctanswer){
+        // provide correct feedback
+        correctFeedback.setAttribute("style", "display: default");
+        // DOM add an element
+    }
+    else {
+        // incorrect feedback comes up
+        incorrectFeedback.setAttribute("style", "display: default");
+        // global time variable is substracted from
+        time = time - 10; 
+    }
+    //checks if there are more questions
+    if (questionIndex < questionsArr.length) {
+        questionIndex++;
+        renderQuestion();
 }
-else {
-    // incorrect feedback comes up
-    incorrectFeedback.setAttribute("style", "display: default");
-    // global time variable is substracted from
-    time =- 10; 
-}
+});
 
-
-function startTimer() {
-    time--; 
-    //remder time to the screen
-}
 
 //check timer if === 0 then end quiz=
 // if time runs out clear the interval
@@ -131,3 +138,9 @@ function endQuiz(){
 // new javascript file for highscores page
 //pull items out of local storage and display on the screen
 // have option to clear highscores
+
+function submitInit(event){
+
+    var initials = document.getElementById("initials").submit();
+    console.log(initials);
+}

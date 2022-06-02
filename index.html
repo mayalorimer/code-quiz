@@ -37,19 +37,19 @@
             <p class="correct">Correct</p>
             <p class="incorrect">Incorrect</p>
         </div>
-        create classes and ids that can be accessed via javascript
-        ex. question div - within have a header2 for the question, ul for the choices
-        use classes to hide and show elements, ex. css styling of none, take away with javascript
 
         <!--use for correct or incorrect-->
         <div class="feedback"></div>
-        div for feedback, ex. correct or incorrect through js
+
 
         <div class="endScreen">
             <p>All done!</p>
             <p>Your final score is: </p>
             <div class="initialSubmit"></div>
-            <button type="button">Submit</button>
+            <form id="initials">Initials: <input type="text" name="init"> 
+                <input type="button" onclick="submitInit()" value="Submit">
+            </form>
+     
         </div>
         end of quiz screen - use divs for:
         All done!
