@@ -47,8 +47,16 @@ h2 {
     font-size: 20px; 
 }
 
-.correct,
-.incorrect,
 .endScreen {
     display: none; 
+}
+
+.endScreen {
+    padding: 5px;
+    margin: 5px;
+    font-size: 25px; 
+}
+.endScreen p {
+    font-size: 40px;
+    color: rgb(1, 1, 154);  
 }

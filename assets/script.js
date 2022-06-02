@@ -10,6 +10,7 @@ var endScreen = document.querySelector(".endScreen");
 var Finalscore = document.querySelector(".score"); 
 var initialsInput = document.querySelector("#initials");
 var submitBtn = document.querySelector("#submit-btn");
+var clearScoresBtn = document.querySelector(".clear-highscores");
 
 //general variables
 var score = 0; 
@@ -34,6 +35,11 @@ var questionsArr = [
         title: "Common data types DO NOT include ___.",
         answerChoices: ["boolean", "alerts", "string", "number"],
         correctanswer: "alerts"
+    }, 
+    {
+        title: "What is CSS used for?",
+        answerChoices: ["Writing content", "Styling content", "Handling logic", "User interaction"],
+        correctanswer: "Styling content"
     }
 ]
 
@@ -201,17 +207,24 @@ submitBtn.addEventListener("click", function(event){
     console.log(highscoresArr); 
     localStorage.setItem("highscores", JSON.stringify(highscoresArr));
     location.href = "./highscore.html";
-})
+
+    //under this is unsure
+
+
+
+    //displays high scores
+    displayStorage(); 
+
+});
 
 var highScoreDisplay = document.querySelector("highScores");
 
 
-// double check this
-var displayScores = [];
-var checkScores = JSON.parse(localStorage.getItem("highscores"));
-    if (checkScores) {
-        for (var i = 0; i < checkScores.length; i++){
-            displayScores.push(checkScores[i]);
-        }
-        highScoreDisplay.textContent = displayScores; 
-    }
+
+//clears the scores when clicked
+function clearScores() {
+    localStorage.removeItem('highscores');
+}
+
+clearScoresBtn.addEventListener("click", clearScores); 
+
