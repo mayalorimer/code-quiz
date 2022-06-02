@@ -6,6 +6,7 @@
 var timerElement = document.querySelector(".timer-count");
 var questions = document.querySelector(".question");
 var answers = document.querySelector(".answers");
+var endScreen = document.querySelector(".endScreen");
 
 //general variables
 var score = 0; 
@@ -117,8 +118,16 @@ answers.addEventListener("click", function(event){
     //checks if there are more questions
     if (questionIndex < questionsArr.length) {
         questionIndex++;
+        answers.innerHTML = ''; 
         renderQuestion();
-}
+    }
+    else {
+        questions.setAttribute("style", "display: none");
+        answers.setAttribute("style", "display: none");
+        score = time;
+        clearInterval(timerInterval);
+        endQuiz(); 
+    }
 });
 
 
@@ -131,7 +140,7 @@ function endQuiz(){
     localStorage.setItem(key, value);
     //store scores in an array and stringigy to put in local storage
     // make sure to pull out scores from local storage and put them in an array then push the most recent score to the array and restore
-
+    endScreen.setAttribute("style", "display: default");
     //display final score page
 }
 
