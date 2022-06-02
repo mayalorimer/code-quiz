@@ -220,10 +220,25 @@ submitBtn.addEventListener("click", function(event){
 var highScoreDisplay = document.querySelector("highScores");
 
 
+// double check this
+function displayStorage(){
+    var storedScores = localStorage.getItem("highscores");
+    var scoreObjects = JSON.parse(storedScores); 
+    
+    for (var i = 0; i < scoreObjects.length; i++){
+        highScoreDisplay.write(scoreObjects[i] + "<br>");
+    }
+}
 
 //clears the scores when clicked
 function clearScores() {
-    localStorage.removeItem('highscores');
+    highscoresArr = [];
+
+    while (highscoresArr.firstChild){
+        highScoresListhighs.removeChild(highScoresList)
+    }
+
+    localStorage.clear();
 }
 
 clearScoresBtn.addEventListener("click", clearScores); 

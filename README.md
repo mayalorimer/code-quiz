@@ -13,3 +13,6 @@ This code quiz is designed to test the users knowledge on CSS, HTML, and JavaScr
 - JavaScript
 
 # Screenshot
+
+![Screenshot of quiz](./assets/screenshot1.jpg)
+![Screenshot 2 of quiz](./assets/screenshot2.jpg)
