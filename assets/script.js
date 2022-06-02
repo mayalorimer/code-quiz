@@ -7,6 +7,7 @@ var timerElement = document.querySelector(".timer-count");
 var questions = document.querySelector(".question");
 var answers = document.querySelector(".answers");
 var endScreen = document.querySelector(".endScreen");
+var Finalscore = document.querySelector(".score"); 
 
 //general variables
 var score = 0; 
@@ -64,7 +65,7 @@ function startTimer(){
         }
 
         if (time === 0){
-            clearInterval(timerInterval);
+            clearInterval(timer);
             // lose function
         }
     }, 1000);
@@ -73,14 +74,20 @@ function startTimer(){
 
 // renderQuestion()
 function renderQuestion(){
-    questions.textContent = questionsArr[questionIndex].title; 
-    for (var j = 0; j < 4; j++){
-        var li = document.createElement('li');
-        var text = document.createTextNode(questionsArr[questionIndex].answerChoices[j]);
-        li.appendChild(text);
-        answers.appendChild(li);
-        answers.setAttribute('style', "list-style: none");
+    if (questionIndex < questionsArr.length){
+        questions.textContent = questionsArr[questionIndex].title; 
+        for (var j = 0; j < 4; j++){
+            var li = document.createElement('li');
+            var text = document.createTextNode(questionsArr[questionIndex].answerChoices[j]);
+            li.appendChild(text);
+            answers.appendChild(li);
+            answers.setAttribute('style', "list-style: none");
+        }
     }
+    else {
+        endQuiz();
+    }
+   
 
 // change hidden value of questions div
 // variable with array of objects to hold questions
@@ -99,36 +106,46 @@ function renderQuestion(){
 
 //when an answer is clicked, give feedback and increment questionIndex, then rerender Question
 
-var correctFeedback = document.querySelector(".correct");
-var incorrectFeedback = document.querySelector(".incorrect");
+var feedback = document.querySelector(".feedback");
+feedback.setAttribute("style", "font-style: italic");
 
 answers.addEventListener("click", function(event){
-    var selectedAns = event.target;
-    if(selectedAns === questionsArr[questionIndex].correctanswer){
+    var correct = questionsArr[questionIndex].correctanswer; 
+    var selectedAns = event.target.textContent; 
+    if(selectedAns === correct){
         // provide correct feedback
-        correctFeedback.setAttribute("style", "display: default");
+        feedback.textContent = "Correct!"; 
         // DOM add an element
     }
     else {
         // incorrect feedback comes up
-        incorrectFeedback.setAttribute("style", "display: default");
+        feedback.textContent = "Incorrect";
         // global time variable is substracted from
         time = time - 10; 
     }
+    setTimeout(function(){
+        checkQuestions();
+        feedback.textContent = "";
+    }, 500); 
     //checks if there are more questions
-    if (questionIndex < questionsArr.length) {
+
+});
+
+function checkQuestions(){
+    if (questionIndex < questionsArr.length - 1) {
         questionIndex++;
-        answers.innerHTML = ''; 
+        answers.innerHTML = '';
+        questions.innerHTML = '';
         renderQuestion();
     }
     else {
         questions.setAttribute("style", "display: none");
         answers.setAttribute("style", "display: none");
         score = time;
-        clearInterval(timerInterval);
+        clearInterval(timer);
         endQuiz(); 
     }
-});
+}
 
 
 //check timer if === 0 then end quiz=
@@ -137,10 +154,11 @@ answers.addEventListener("click", function(event){
 function endQuiz(){
     // hide questions and display initials form
     //on submit initials send the initials and final score to local storage
-    localStorage.setItem(key, value);
+ //   localStorage.setItem(key, value);
     //store scores in an array and stringigy to put in local storage
     // make sure to pull out scores from local storage and put them in an array then push the most recent score to the array and restore
-    endScreen.setAttribute("style", "display: default");
+    endScreen.setAttribute("style", "display: block");
+    Finalscore.textContent = "Your final score is: " + score; 
     //display final score page
 }
 
