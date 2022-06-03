@@ -1,8 +1,4 @@
 // Global variable references
-//questions div
-// list items of answers
-// end game div
-// timer (span)
 var timerElement = document.querySelector(".timer-count");
 var questions = document.querySelector(".question");
 var answers = document.querySelector(".answers");
@@ -17,12 +13,8 @@ var score = 0;
 var time = 60;
 var timer;
 var questionIndex = 0; 
-//questions left (by rendering the indexes)
 var questionIndex = 0; 
-//feedback, correct/incorrect
 var highscoresArr = [];
-
-
 
 //array that holds the questions
 var questionsArr = [
@@ -40,17 +32,17 @@ var questionsArr = [
         title: "What is CSS used for?",
         answerChoices: ["Writing content", "Styling content", "Handling logic", "User interaction"],
         correctanswer: "Styling content"
-    }
+    },
     {
         title: "What is the correct way to bold text in CSS?",
         answerChoices: ["Font: bold", "Font-size: larger", "Font-weight: bold", "Font-color: black"],
         correctanswer: "Font-weight: bold"
-    }
+    },
     {
         title: "What feature of Javascript is required to start a function when the user clicks on a certain object?",
         answerChoices: ["querySelector", "addEventListener", "onClick", "userInteraction"],
         correctanswer: "addEventListener"
-    }
+    },
     {
         title: "What method do you use to display data in the browsers console?",
         answerChoices: ["console.display()", "println()", "console.log()", "showConsole()"],
@@ -84,14 +76,12 @@ function startTimer(){
         time--;
         timerElement.textContent = time;
 
-        if (time > 0){
-            //fill out what happens if there is more time left
-            //check if the questions are done being answered
-        }
-
         if (time === 0){
             clearInterval(timer);
-            // lose function
+            window.alert("Time's up!");
+            answers.innerHTML = '';
+            questions.innerHTML = '';
+            endQuiz();
         }
     }, 1000);
 }
@@ -114,26 +104,13 @@ function renderQuestion(){
     }
    
 
-// change hidden value of questions div
-// variable with array of objects to hold questions
-
 }
 
-//reference the index of hte question to display on the screen, start at 0 and loop through
-//increment the quesiton variable when the previous is answered
-
-// grab html reference to header to append question(0).title to html reference
-//grab html reference, push question answers to an array, loop through answers create a list, append to the ul
-
-
-//add event listeners to the answer choices or div that holds the answer choices using event.target and if matches the correct answer
-// listen for click, make event.target a variable, conditional to see if it is equal to the correct answer, provide feedback
-
-//when an answer is clicked, give feedback and increment questionIndex, then rerender Question
 
 var feedback = document.querySelector(".feedback");
 feedback.setAttribute("style", "font-style: italic");
 
+//checks the answer choice and gives feedback based on if it is correct
 answers.addEventListener("click", function(event){
     var correct = questionsArr[questionIndex].correctanswer; 
     var selectedAns = event.target.textContent; 
@@ -156,6 +133,7 @@ answers.addEventListener("click", function(event){
 
 });
 
+//checks if there are more questions
 function checkQuestions(){
     if (questionIndex < questionsArr.length - 1) {
         questionIndex++;
@@ -173,24 +151,13 @@ function checkQuestions(){
 }
 
 
-//check timer if === 0 then end quiz=
-// if time runs out clear the interval
 
 function endQuiz(){
-    // hide questions and display initials form
-    //on submit initials send the initials and final score to local storage
- //   localStorage.setItem(key, value);
-    //store scores in an array and stringigy to put in local storage
-    // make sure to pull out scores from local storage and put them in an array then push the most recent score to the array and restore
     endScreen.setAttribute("style", "display: block");
     Finalscore.textContent = "Your final score is: " + score; 
-    //display final score page
 }
 
-// new javascript file for highscores page
-//pull items out of local storage and display on the screen
-// have option to clear highscores
-
+//submit form for initials
 function submitInit(event){
 
     var initials = document.getElementById("initials").submit();
@@ -224,38 +191,10 @@ submitBtn.addEventListener("click", function(event){
     localStorage.setItem("highscores", JSON.stringify(highscoresArr));
     location.href = "./highscore.html";
 
-    //under this is unsure
-
-
-
     //displays high scores
     displayStorage(); 
 
 });
 
-var highScoreDisplay = document.querySelector("highScores");
 
-
-// double check this
-function displayStorage(){
-    var storedScores = localStorage.getItem("highscores");
-    var scoreObjects = JSON.parse(storedScores); 
-    
-    for (var i = 0; i < scoreObjects.length; i++){
-        highScoreDisplay.write(scoreObjects[i] + "<br>");
-    }
-}
-
-//clears the scores when clicked
-function clearScores() {
-    highscoresArr = [];
-
-    while (highscoresArr.firstChild){
-        highScoresListhighs.removeChild(highScoresList)
-    }
-
-    localStorage.clear();
-}
-
-clearScoresBtn.addEventListener("click", clearScores); 
 
